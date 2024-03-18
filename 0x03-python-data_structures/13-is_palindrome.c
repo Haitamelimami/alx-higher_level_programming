@@ -1,70 +1,48 @@
 #include "lists.h"
-#include <stdio.h>
-
-void reverse(listint_t **head);
-int compare_lists(listint_t *head, listint_t *middle, int len); // Corrected function name
-
+#include <stdlib.h>
+/**
+ * is_palindrome - check if linked list is palindrome
+ * @head: the adress to the linked list
+ * Return: 1 if true and 0 if not
+ */
 int is_palindrome(listint_t **head)
 {
-    int len, i;
-    listint_t *tmp;
-    listint_t *middle;
+	int n, i, a, li;
+	int *name;
+	listint_t *current;
+	listint_t  *new;
 
-    if (head == NULL || *head == NULL)
-        return (1);
-    tmp = *head;
-    middle = *head;
-
-    for (len = 0; tmp != NULL; len++)
-        tmp = tmp->next;
-
-    len = len / 2; // Added semicolon to end statement
-
-    for (i = 1; i < len; i++)
-        middle = middle->next;
-    if (len % 2 != 0 && len != 1)
-    {
-        middle = middle->next;
-        len = len - 1; // Added semicolon to end statement
-    }
-    reverse(&middle);
-    i = compare_lists(*head, middle, len); // Corrected function name
-
-    return (i);
-}
-
-int compare_lists(listint_t *head, listint_t *middle, int len) // Corrected function name and parameters
-{
-    int i;
-
-    if (head == NULL || middle == NULL)
-        return (1);
-    for (i = 0; i < len; i++)
-    {
-        if (head->n != middle->n)
-            return (0);
-        head = head->next;
-        middle = middle->next;
-    }
-    return (1);
-}
-
-void reverse(listint_t **head)
-{
-    listint_t *current;
-    listint_t *next;
-    listint_t *prev = NULL; // Initialized prev to NULL
-
-    if (head == NULL || *head == NULL)
-        return;
-
-    current = *head;
-    while (current != NULL)
-    {
-        next = current->next;
-        current->next = prev;
-        prev = current; // Moved prev to next position
-        current = next;
-    }
-    *head = prev;
+	current = *head;
+	if (*head == NULL)
+	{
+		return (1);
+	}
+	n = 0;
+	while (current != NULL)
+	{
+		current = current->next;
+		n++;
+	}
+	name = malloc(sizeof(int) * n);
+	if (name == NULL)
+	{
+		return (0);
+	}
+	new = *head;
+	for (i = 0; new != NULL && i < n; i++)
+	{
+		name[i] = new->n;
+		new = new->next;
+	}
+	for (a = 0; a < n/2; a++)
+	{
+		li = n - a - 1;
+		if (name[a] != name[li])
+		{
+			free(name);
+			return (0);
+		}
+	}
+	free(name);
+	return (1);
 }
