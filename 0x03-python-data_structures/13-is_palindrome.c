@@ -45,22 +45,22 @@ int is_palindrome(listint_t **head)
   */
 listint_t *get_nodeint_at_index(listint_t *head, unsigned int index)
 {
-    listint_t *current = head;
-    unsigned int iter_times = 0;
+	listint_t *current = head;
+	unsigned int iter_times = 0;
 
-    if (head)
-    {
-        while (current != NULL)
-        {
-            if (iter_times == index)
-                return (current);
+	if (head)
+	{
+		while (current != NULL)
+		{
+			if (iter_times == index)
+				return (current);
 
-            current = current->next;
-            ++iter_times;
-        }
-    }
+			current = current->next;
+			++iter_times;
+		}
+	}
 
-    return (NULL);
+	return (NULL);
 }
 
 /**
@@ -71,13 +71,13 @@ listint_t *get_nodeint_at_index(listint_t *head, unsigned int index)
   */
 size_t listint_len(const listint_t *h)
 {
-    int lenght = 0;
+	int lenght = 0;
 
-    while (h != NULL)
-    {
-        ++lenght;
-        h = h->next;
-    }
+	while (h != NULL)
+	{
+		++lenght;
+		h = h->next;
+	}
 
-    return (lenght);
+	return (lenght);
 }
